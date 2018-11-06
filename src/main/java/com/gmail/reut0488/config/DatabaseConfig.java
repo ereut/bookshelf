@@ -1,7 +1,6 @@
 package com.gmail.reut0488.config;
 
 import liquibase.integration.spring.SpringLiquibase;
-import org.hibernate.SessionFactory;
 import org.springframework.boot.context.properties.ConfigurationProperties;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -9,10 +8,12 @@ import org.springframework.jdbc.datasource.DriverManagerDataSource;
 import org.springframework.orm.hibernate5.HibernateTransactionManager;
 import org.springframework.orm.hibernate5.LocalSessionFactoryBean;
 import org.springframework.transaction.PlatformTransactionManager;
+import org.springframework.transaction.annotation.EnableTransactionManagement;
 
 import javax.sql.DataSource;
 
 @Configuration
+@EnableTransactionManagement
 public class DatabaseConfig {
 
     @Bean
@@ -20,6 +21,7 @@ public class DatabaseConfig {
        SpringLiquibase springLiquibase = new SpringLiquibase();
        springLiquibase.setDataSource(dataSource());
        springLiquibase.setChangeLog("classpath:liquibase/master-changelog.xml");
+       springLiquibase.setContexts("test, production");
        return springLiquibase;
     }
 
@@ -30,10 +32,11 @@ public class DatabaseConfig {
     }
 
     @Bean
+    @ConfigurationProperties(prefix = "spring.jpa")
     LocalSessionFactoryBean sessionFactory() {
         LocalSessionFactoryBean localSessionFactoryBean = new LocalSessionFactoryBean();
         localSessionFactoryBean.setDataSource(dataSource());
-        localSessionFactoryBean.setPackagesToScan("com.intervale.reut0488");
+        localSessionFactoryBean.setPackagesToScan("com.gmail.reut0488.model");
         return localSessionFactoryBean;
     }
 

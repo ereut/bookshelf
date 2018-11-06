@@ -1,7 +1,9 @@
 package com.gmail.reut0488.dao;
 
-import com.gmail.reut0488.entities.AbstractEntity;
+import com.gmail.reut0488.model.IEntity;
 
-public interface IDao<T extends AbstractEntity> {
-    T save(T entity);
+import javax.validation.constraints.NotNull;
+
+public interface IDao<T extends IEntity> {
+    T save(@NotNull T entity);
 }

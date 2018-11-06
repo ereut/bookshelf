@@ -6,7 +6,7 @@
 
     <changeSet id="1" author="ereut">
         <createTable tableName="authors">
-            <column name="id" type="bigint" autoIncrement="true">
+            <column name="id" type="bigint">
                 <constraints nullable="false" primaryKey="true" unique="true"/>
             </column>
             <column name="first_name" type="varchar(20)">
@@ -19,6 +19,13 @@
                 <constraints nullable="false"/>
             </column>
         </createTable>
+    </changeSet>
+
+    <changeSet id="2" author="ereut">
+        <createTable tableName="hibernate_sequence">
+            <column name="next_val" type="bigint"></column>
+        </createTable>
+        <sql>INSERT into hibernate_sequence (next_val) VALUES (1)</sql>
     </changeSet>
 
 </databaseChangeLog>
