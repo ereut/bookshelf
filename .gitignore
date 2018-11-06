@@ -1,0 +1,13 @@
+**/target
+**/log
+target
+.idea
+*.epoch
+*.iml
+*.ipr
+*.log
+*.out
+*.out.1
+*.lck
+
+
