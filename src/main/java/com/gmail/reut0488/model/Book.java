@@ -4,21 +4,33 @@ import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 
-import javax.persistence.Entity;
-import javax.persistence.Table;
-import java.sql.Date;
-import java.util.List;
+import javax.persistence.*;
+import java.util.Set;
 
-//@Entity
-//@Table(name = "books")
+@Entity
+@Table(name = "books")
 @Getter
 @NoArgsConstructor
 @AllArgsConstructor
 public class Book implements IEntity {
 
+    @Id
+    @Column(name = "id", updatable = false, nullable = false)
+    @SequenceGenerator(name = "booksSequenceGenerator", allocationSize = 1, sequenceName = "booksSequence")
+    @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "booksSequenceGenerator" )
     private Long id;
+    @Column(name = "title")
     private String title;
-    private List<Author> authorsList;
-    private Date publishingYear;
+
+    @OneToMany(cascade = CascadeType.ALL)
+    @JoinTable(name = "books_authors",
+    joinColumns = @JoinColumn(name = "book_id"),
+    inverseJoinColumns = @JoinColumn(name = "author_id")
+    )
+    private Set<Author> authorsSet;
+
+
+
+
 
 }

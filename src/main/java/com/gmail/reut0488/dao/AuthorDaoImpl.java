@@ -5,6 +5,7 @@ import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
+import org.springframework.transaction.annotation.Transactional;
 
 import javax.validation.constraints.NotNull;
 import java.util.List;
@@ -16,6 +17,7 @@ public class AuthorDaoImpl implements IDao<Author> {
     private SessionFactory sessionFactory;
 
     @Override
+    @Transactional
     public Author save(@NotNull Author entity) {
         Session session = sessionFactory.openSession();
         session.beginTransaction();
@@ -40,7 +42,7 @@ public class AuthorDaoImpl implements IDao<Author> {
         Session session = sessionFactory.openSession();
         session.beginTransaction();
 //        List<Author> authorsList = session.createNativeQuery("SELECT * FROM authors", Author.class).getResultList();
-        List<Author> authorsList = (List<Author>) session.createSQLQuery("FROM " + Author.class).list();
+        List<Author> authorsList = (List<Author>) session.createQuery("FROM " + Author.class.getName()).list();
         session.getTransaction().commit();
         session.close();
         return authorsList;

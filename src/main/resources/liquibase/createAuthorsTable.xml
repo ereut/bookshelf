@@ -15,15 +15,12 @@
             <column name="last_name" type="varchar(25)">
                 <constraints nullable="false"/>
             </column>
-            <column name="birth_date" type="date">
-                <constraints nullable="false"/>
-            </column>
         </createTable>
     </changeSet>
 
     <changeSet id="2" author="ereut">
         <createTable tableName="hibernate_sequence">
-            <column name="next_val" type="bigint"></column>
+            <column name="next_val" type="bigint"/>
         </createTable>
         <sql>INSERT into hibernate_sequence (next_val) VALUES (1)</sql>
     </changeSet>

@@ -8,6 +8,7 @@ import java.util.List;
 
 public interface IDao<T extends IEntity> {
     T save(@NotNull T entity);
-    @Nullable T getById(@NotNull Long id);
+    @Nullable
+    T getById(@NotNull Long id);
     @NotNull List<T> getAll();
 }

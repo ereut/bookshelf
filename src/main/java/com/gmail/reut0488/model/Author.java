@@ -3,7 +3,6 @@ package com.gmail.reut0488.model;
 import lombok.*;
 
 import javax.persistence.*;
-import java.sql.Date;
 
 @Entity
 @Table(name = "authors")
@@ -13,7 +12,9 @@ import java.sql.Date;
 @ToString
 public class Author implements IEntity {
 
-    private static final String BIRTH_DATE_PATTERN = "dd.MM.yyyy";
+    public Author(String firstName, String lastName) {
+        this(null, firstName, lastName);
+    }
 
     @Id
     @Column(name = "id", nullable = false, updatable = false)
@@ -27,13 +28,5 @@ public class Author implements IEntity {
     @Column(name = "last_name")
     @Setter
     private String lastName;
-
-    @Column(name = "birth_date")
-    @Setter
-    private Date birthDate;
-
-    public Author(String firstName, String lastName, Date birthDate) {
-        this(null, firstName, lastName, birthDate);
-    }
 
 }
