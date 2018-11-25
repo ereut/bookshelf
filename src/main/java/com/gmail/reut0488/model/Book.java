@@ -1,25 +1,31 @@
 package com.gmail.reut0488.model;
 
-import lombok.AllArgsConstructor;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-
+import com.fasterxml.jackson.annotation.JsonView;
+import com.gmail.reut0488.transfer.IFullDetails;
+import com.gmail.reut0488.transfer.INewable;
+import com.gmail.reut0488.transfer.IUpdateable;
+import lombok.Data;
 import javax.persistence.*;
+import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Null;
 import java.util.Set;
 
 @Entity
 @Table(name = "books")
-@Getter
-@NoArgsConstructor
-@AllArgsConstructor
+@Data
 public class Book implements IEntity {
 
     @Id
     @Column(name = "id", updatable = false, nullable = false)
     @SequenceGenerator(name = "booksSequenceGenerator", allocationSize = 1, sequenceName = "booksSequence")
-    @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "booksSequenceGenerator" )
+    @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "booksSequenceGenerator")
+    @Null(groups = {INewable.class})
+    @NotNull(groups = {IUpdateable.class})
+    @JsonView(IFullDetails.class)
     private Long id;
     @Column(name = "title")
+    @NotNull(groups = {INewable.class, IUpdateable.class})
+    @JsonView(IFullDetails.class)
     private String title;
 
     @OneToMany(cascade = CascadeType.ALL)

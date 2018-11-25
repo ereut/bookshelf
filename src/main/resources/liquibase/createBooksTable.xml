@@ -16,5 +16,15 @@
     <changeSet id="5" author="ereut">
         <createSequence sequenceName="booksSequence"/>
     </changeSet>
+    
+    <changeSet id="6" author="ereut">
+        <createTable tableName="bookssequence">
+            <column name="next_val" type="bigint"></column>
+        </createTable>
+    </changeSet>
+
+    <changeSet id="7" author="ereut">
+        <sql>INSERT into bookssequence (next_val) VALUES (1)</sql>
+    </changeSet>
 
 </databaseChangeLog>
