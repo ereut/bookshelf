@@ -20,7 +20,6 @@ public class Author implements IEntity {
     @GeneratedValue(strategy = GenerationType.AUTO)
     @Null(groups = INewable.class)
     @NotNull(groups = IUpdateable.class)
-    @JsonView(IFullDetails.class)
     private Long id;
 
     @Column(name = "first_name")

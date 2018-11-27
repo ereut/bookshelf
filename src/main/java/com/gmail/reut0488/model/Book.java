@@ -5,6 +5,7 @@ import com.gmail.reut0488.transfer.IFullDetails;
 import com.gmail.reut0488.transfer.INewable;
 import com.gmail.reut0488.transfer.IUpdateable;
 import lombok.Data;
+
 import javax.persistence.*;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Null;
@@ -17,26 +18,22 @@ public class Book implements IEntity {
 
     @Id
     @Column(name = "id", updatable = false, nullable = false)
-    @SequenceGenerator(name = "booksSequenceGenerator", allocationSize = 1, sequenceName = "booksSequence")
+    @SequenceGenerator(name = "booksSequenceGenerator", allocationSize = 1, sequenceName = "books_sequence")
     @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "booksSequenceGenerator")
     @Null(groups = {INewable.class})
     @NotNull(groups = {IUpdateable.class})
-    @JsonView(IFullDetails.class)
     private Long id;
     @Column(name = "title")
     @NotNull(groups = {INewable.class, IUpdateable.class})
     @JsonView(IFullDetails.class)
     private String title;
 
-    @OneToMany(cascade = CascadeType.ALL)
+    @JsonView(IFullDetails.class)
+    @OneToMany(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
     @JoinTable(name = "books_authors",
     joinColumns = @JoinColumn(name = "book_id"),
     inverseJoinColumns = @JoinColumn(name = "author_id")
     )
     private Set<Author> authorsSet;
-
-
-
-
 
 }
