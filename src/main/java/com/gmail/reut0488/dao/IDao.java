@@ -6,6 +6,7 @@ import org.springframework.lang.Nullable;
 import javax.validation.constraints.NotNull;
 import java.util.List;
 
+
 public interface IDao<T extends IEntity> {
     T save(@NotNull T entity);
     @Nullable

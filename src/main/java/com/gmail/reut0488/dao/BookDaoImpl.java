@@ -37,4 +37,5 @@ public class BookDaoImpl implements IDao<Book> {
                 .getCurrentSession()
                 .createQuery("FROM " + Book.class.getName()).list();
     }
+
 }

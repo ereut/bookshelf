@@ -37,4 +37,5 @@ public class AuthorDaoImpl implements IDao<Author> {
                 .getCurrentSession()
                 .createQuery("FROM " + Author.class.getName()).list();
     }
+
 }

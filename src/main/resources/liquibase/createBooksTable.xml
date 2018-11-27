@@ -19,7 +19,7 @@
     
     <changeSet id="6" author="ereut">
         <createTable tableName="books_sequence">
-            <column name="next_val" type="bigint"></column>
+            <column name="next_val" type="bigint"/>
         </createTable>
     </changeSet>
 
