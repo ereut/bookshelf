@@ -12,4 +12,7 @@ public interface IDao<T extends IEntity> {
     @Nullable
     T getById(@NotNull Long id);
     @NotNull List<T> getAll();
+    void delete(@NotNull Long id);
+    @NotNull
+    T update(@NotNull T entity);
 }
